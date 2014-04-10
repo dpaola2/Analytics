@@ -1,2 +1,9 @@
-%h1 StandardEvents#show
-%p Find me in app/views/standard_events/show.html.haml
+%ol.breadcrumb
+  %li= link_to "Events", standard_events_path
+  %li= @standard_event_name
+.span8
+  %h3 by hour
+  = column_chart StandardEvent.where(:name => @standard_event_name).group_by_hour(:timestamp, :last => 24, :format => "%l%p").count
+  %h3 by day
+  = column_chart StandardEvent.where(:name => @standard_event_name).group_by_day(:timestamp, :last => 30, :format => "%m/%d/%Y").count
+

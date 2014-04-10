@@ -6,5 +6,6 @@ class StandardEventsController < ApplicationController
   end
 
   def show
+    @standard_event_name = params[:id]
   end
 end

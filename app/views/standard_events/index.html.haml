@@ -1,10 +1,7 @@
 %ol.breadcrumb
-  %li.active Standard Events
+  %li.active Events
 %p.leading== #{@standard_events.count} total
 .span8
-  - @standard_events.each do |event|
-    %h1= event.name
-    %h3 by hour
-    = column_chart StandardEvent.where(:name => event.name).group_by_hour(:timestamp, :last => 24, :format => "%l%p").count
-    %h3 by day
-    = column_chart StandardEvent.where(:name => event.name).group_by_day(:timestamp, :last => 30, :format => "%m/%d/%Y").count
+  %ul
+    - @standard_events.each do |event|
+      %li= link_to event.name, standard_event_path(event)

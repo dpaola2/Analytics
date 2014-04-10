@@ -7,4 +7,8 @@ class StandardEvent < ActiveRecord::Base
       se = StandardEvent.create!(:name => name, :timestamp => timestamp, :event_id => event_id)
     end
   end
+
+  def to_param
+    self.name
+  end
 end
