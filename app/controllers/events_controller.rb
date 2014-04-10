@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!, :except => [:create]
   
   def index
-    @events = Event.all
+    @events = Event.order('created_at DESC').page(params[:page]).per_page(100)
   end
 
   def new

@@ -10,3 +10,4 @@
         %tr
           %td= time_ago_in_words(event.created_at)
           %td= event.blob
+  = will_paginate @events
