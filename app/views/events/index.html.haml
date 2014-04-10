@@ -1,4 +1,5 @@
-%h3 Events
+%ol.breadcrumb
+  %li.active Events
 %p.leading== #{@event_count} total
 .span8
   %table.table.table-condensed
@@ -9,6 +10,6 @@
     %tbody
       - @events.each do |event|
         %tr
-          %td= time_ago_in_words(event.created_at)
+          %td= link_to "#{time_ago_in_words(event.created_at)} ago", event_path(event)
           %td= event.blob
   = will_paginate @events

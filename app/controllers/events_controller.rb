@@ -6,7 +6,8 @@ class EventsController < ApplicationController
     @events = Event.order('created_at DESC').page(params[:page]).per_page(100)
   end
 
-  def new
+  def show
+    @event = Event.find params[:id]
   end
 
   def create

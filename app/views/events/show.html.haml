@@ -1,0 +1,9 @@
+%ol.breadcrumb
+  %li= link_to "Events", events_path
+  %li.active== Event #{@event.id}
+
+%p.leading= @event.created_at
+%p.leading== #{time_ago_in_words(@event.created_at)} ago
+
+%pre
+  = JSON.pretty_generate(JSON.parse(@event.blob))
