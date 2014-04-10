@@ -1,9 +1,8 @@
 Analytics::Application.routes.draw do
-  get "events/index"
-  get "events/new"
+  resources :standard_events, :only => [:index, :show]
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
   match "events/create" => "events#create", :via => [:get, :post, :put]
-  resources :events
+  resources :events, :only => [:index, :create, :show]
 end
