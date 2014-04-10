@@ -1,4 +1,5 @@
 Analytics::Application.routes.draw do
+  resources :page_views, :only => [:index]
   resources :standard_events, :only => [:index, :show]
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}

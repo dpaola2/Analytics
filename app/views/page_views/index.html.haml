@@ -1,0 +1,7 @@
+%ol.breadcrumb
+  %li.active Pageviews
+.span8
+  %h2 Past 24 hours
+  = column_chart PageView.group_by_hour(:timestamp, :last => 24, :format => "%l%p").count
+  %h2 Past 30 days
+  = column_chart PageView.group_by_day(:timestamp, :last => 30, :format => "%m/%d/%Y").count
