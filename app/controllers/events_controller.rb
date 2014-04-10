@@ -11,13 +11,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    raw = event_params
-    blob = raw
-    begin
-      blob = event_params.to_json
-    rescue Exception => e
-      blob = "BAD: #{raw}"
-    end
+    blob = event_params
     @event = Event.new(:blob => blob)
     if @event.save
       respond_to do |format|
