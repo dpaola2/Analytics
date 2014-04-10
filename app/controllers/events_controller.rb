@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   
   def index
     @event_count = Event.count
-    @events = Event.order('created_at DESC').page(params[:page]).per_page(100)
+    @events = Event.order('created_at DESC').page(params[:page]).per_page(10)
   end
 
   def show

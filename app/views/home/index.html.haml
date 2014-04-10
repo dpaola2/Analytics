@@ -1,4 +1,4 @@
 %h3 Home
 
-Events ingested
-= line_chart Event.group_by_day(:created_at).count
+Events ingested by hour
+= column_chart Event.group_by_hour(:created_at).count

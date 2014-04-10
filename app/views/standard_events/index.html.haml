@@ -5,6 +5,6 @@
   - @standard_events.each do |event|
     %h1= event.name
     %h3 by hour
-    = line_chart StandardEvent.where(:name => event.name).group_by_hour(:timestamp).count
+    = column_chart StandardEvent.where(:name => event.name).group_by_hour(:timestamp).count
     %h3 by day
-    = line_chart StandardEvent.where(:name => event.name).group_by_day(:timestamp).count
+    = column_chart StandardEvent.where(:name => event.name).group_by_day(:timestamp).count
