@@ -31,10 +31,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.permit!
-    actuals = params.dup
-    actuals.delete(:action)
-    actuals.delete(:controller)
-    actuals
+    request.raw_post
   end
 end

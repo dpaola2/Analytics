@@ -1,1 +1,4 @@
 %h3 Home
+
+Events ingested
+= line_chart Event.group_by_day(:created_at).count
