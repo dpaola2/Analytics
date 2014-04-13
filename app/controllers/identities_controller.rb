@@ -3,4 +3,8 @@ class IdentitiesController < ApplicationController
 
   def index
   end
+
+  def summary
+    render json: Identity.group_by_week(:created, :last => 12, :format => "%m/%d/%Y").count
+  end
 end
