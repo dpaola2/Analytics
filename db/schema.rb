@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20140410235231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "events", force: true do |t|
     t.text     "blob"
