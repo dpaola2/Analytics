@@ -11,13 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410235231) do
+ActiveRecord::Schema.define(version: 20140413213459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "events", force: true do |t|
     t.text     "blob"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "identities", force: true do |t|
+    t.string   "session_id"
+    t.string   "userid"
+    t.string   "email"
+    t.string   "username"
+    t.datetime "created"
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
