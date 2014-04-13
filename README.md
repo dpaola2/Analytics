@@ -3,68 +3,24 @@ An open source event tracking application. Own your data.
 Instructions
 =======================
 
+* Clone the repository
 * ` bundle install`
 * Create heroku application
 * Add postgres addon: `heroku addons:add heroku-postgresql:dev`
-* Add sendgrid addon: `heroku addons:add sendgrid:starter`
-* Add sendgrid credentials to .env: 
+* Deploy
+* Add a segment.io webhook with the `/events/create` URL to your heroku application
+* Enjoy
 
-Analytics
-========================
+LICENSE
+=======================
 
-This application was generated with the rails_apps_composer gem:
-https://github.com/RailsApps/rails_apps_composer
-provided by the RailsApps Project:
-http://railsapps.github.io/
+Released under the NCSA Public license (see LICENSE).
 
-________________________
+AUTHORS
+======================
 
-Recipes:
+* dpaola2 (Dave Paola)
+* mrdougwright (Doug Wright)
 
-* apps4
-* controllers
-* core
-* email
-* extras
-* frontend
-* gems
-* git
-* init
-* models
-* prelaunch
-* railsapps
-* readme
-* routes
-* saas
-* setup
-* testing
-* views
+This software is used at [Bloc](https://www.bloc.io)
 
-Preferences:
-
-* git: true
-* apps4: none
-* dev_webserver: unicorn
-* prod_webserver: unicorn
-* database: postgresql
-* templates: haml
-* unit_test: rspec
-* integration: none
-* continuous_testing: none
-* fixtures: none
-* frontend: bootstrap3
-* email: sendgrid
-* authentication: devise
-* devise_modules: invitable
-* authorization: cancan
-* form_builder: none
-* starter_app: admin_app
-* rvmrc: true
-* quiet_assets: true
-* local_env_file: foreman
-* better_errors: true
-* ban_spiders: true
-
-________________________
-
-License
