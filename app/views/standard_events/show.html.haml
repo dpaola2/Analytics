@@ -3,7 +3,7 @@
   %li= @standard_event_name
 .span8
   %h3 by hour
-  = column_chart StandardEvent.where(:name => @standard_event_name).group_by_hour(:timestamp, :last => 24, :format => "%l%p").count
+  = column_chart event_data_path(:id => @standard_event_name, :by => "hour")
   %h3 by day
-  = column_chart StandardEvent.where(:name => @standard_event_name).group_by_day(:timestamp, :last => 30, :format => "%m/%d/%Y").count
+  = column_chart event_data_path(:id => @standard_event_name, :by => "day")
 

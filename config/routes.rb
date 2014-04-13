@@ -6,4 +6,5 @@ Analytics::Application.routes.draw do
   resources :users
   match "events/create" => "events#create", :via => [:get, :post, :put]
   resources :events, :only => [:index, :create, :show]
+  match "standard_events/event_data/:id" => "standard_events#event_data", :as => :event_data, :via => [:get, :post, :put]
 end
