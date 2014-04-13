@@ -3,4 +3,10 @@ class PageViewsController < ApplicationController
 
   def index
   end
+
+  def page_data
+    @fact = params[:id]
+    @klass = PageView
+    retrieve_fact_by_dimensions # in application_controller.rb
+  end
 end

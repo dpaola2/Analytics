@@ -2,8 +2,8 @@
   %li.active Pageviews
 .span8
   %h2 Past 24 hours
-  = column_chart PageView.group_by_hour(:timestamp, :last => 24, :format => "%l%p").count
+  = column_chart page_data_path(:id => "*", :by => "hour")
   = pie_chart PageView.where("created_at > ?", DateTime.now - 24.hours).group(:path).count
   %h2 Past 30 days
-  = column_chart PageView.group_by_day(:timestamp, :last => 30, :format => "%m/%d/%Y").count
+  = column_chart page_data_path(:id => "*", :by => "day")
   = pie_chart PageView.where("created_at > ?", Date.today - 30.days).group(:path).count
