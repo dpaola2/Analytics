@@ -30,10 +30,12 @@ class ApplicationController < ActionController::Base
       group_clause = :group_by_day
       group_dimension = :timestamp
     end
-    if @fact == "*"
-      render json: @klass.send(group_clause, group_dimension, :last => last, :format => format).count
+    if @fact.index(",") # multiple
+      @fact.split(",").collect {|f| @klass.send(group_clause, group_dimension, :last => last, :format => format).count }
+    elsif @fact == "*"
+      @klass.send(group_clause, group_dimension, :last => last, :format => format).count
     else
-      render json: @klass.where(:name => @fact).send(group_clause, group_dimension, :last => last, :format => format).count
+      @klass.where(:name => @fact).send(group_clause, group_dimension, :last => last, :format => format).count
     end
   end
 end

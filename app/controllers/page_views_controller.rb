@@ -7,6 +7,6 @@ class PageViewsController < ApplicationController
   def page_data
     @fact = params[:id]
     @klass = PageView
-    retrieve_fact_by_dimensions # in application_controller.rb
+    render json: retrieve_fact_by_dimensions # in application_controller.rb
   end
 end
