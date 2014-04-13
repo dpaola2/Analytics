@@ -1,7 +1,8 @@
 class Event < ActiveRecord::Base
   CLASSMAP = {
     'Track' => StandardEvent,
-    'Page' => PageView
+    'Page' => PageView,
+    'Identify' => Identity
   }
 
   after_save :extract!
