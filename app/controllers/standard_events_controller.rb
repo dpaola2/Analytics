@@ -12,6 +12,16 @@ class StandardEventsController < ApplicationController
   def event_data
     @fact = params[:id]
     @klass = StandardEvent
-    retrieve_fact_by_dimensions # in application_controller.rb
+    render json: retrieve_fact_by_dimensions # in application_controller.rb
+  end
+
+  def event_summary
+    @standard_events = StandardEvent.select('DISTINCT name')
+    @data = @standard_events.map do |e|
+      @fact = e.name
+      @klass = StandardEvent
+      {name: e.name, data: retrieve_fact_by_dimensions}
+    end
+    render json: @data
   end
 end

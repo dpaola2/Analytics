@@ -2,6 +2,7 @@
   %li.active Events
 %p.leading== #{@standard_events.count} total
 .span8
+  = line_chart event_summary_path
   %ul
     - @standard_events.each do |event|
       %li= link_to event.name, standard_event_path(event)
