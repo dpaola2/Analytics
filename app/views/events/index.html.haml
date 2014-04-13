@@ -10,6 +10,6 @@
     %tbody
       - @events.each do |event|
         %tr
-          %td= link_to "#{time_ago_in_words(event.created_at)} ago", event_path(event)
+          %td= link_to "#{time_ago_in_words(event.created_at)} ago", event_path(event.id)
           %td= event.blob
   = will_paginate @events
