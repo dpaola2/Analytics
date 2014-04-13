@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
 
   def admin?
-    "admin".in?(self.roles)
+    self.has_role? :admin
   end
 end
