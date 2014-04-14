@@ -66,4 +66,5 @@ var byMonth = function() {
 
 var updateLabels = function() {
     $('.time_dimension_label').text(window.Prefs.time_bucket);
+    $('.chart_type_label').text(window.Prefs.chart_type);
 };

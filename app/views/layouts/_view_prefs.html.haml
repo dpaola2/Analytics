@@ -1,7 +1,11 @@
 .btn-group
-  = link_to "Line", "javascript:void(0);", :class => "btn btn-primary", :onClick => "useLineChart()"
-  = link_to "Bar", "javascript:void(0);", :class => "btn btn-primary", :onClick => "useBarChart()"
-  = link_to "Pie", "javascript:void(0);", :class => "btn btn-primary", :onClick => "usePieChart()"
+  %a{:href => "javascript:void(0);", :class => "btn btn-default dropdown-toggle", :data => {:toggle => "dropdown"}}
+    %span.chart_type_label Chart Type
+    %span.caret
+  %ul.dropdown-menu
+    %li= link_to "line", "javascript:void(0);", :onClick => "useLineChart()"
+    %li= link_to "bar", "javascript:void(0);", :onClick => "useBarChart()"
+    %li= link_to "pie", "javascript:void(0);", :onClick => "usePieChart()"
 
 .btn-group
   %a{:href => "javascript:void(0);", :class => "btn btn-default dropdown-toggle", :data => {:toggle => "dropdown"}}
