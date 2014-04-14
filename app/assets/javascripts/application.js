@@ -14,3 +14,56 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+var useLineChart = function() {
+    window.Prefs.chart_type = "line";
+    reloadCharts();
+};
+var useBarChart = function() {
+    window.Prefs.chart_type = "bar";
+    reloadCharts();
+};
+var usePieChart = function() {
+    window.Prefs.chart_type = "pie";
+    reloadCharts();
+};
+
+var reloadCharts = function() {
+    var url = window.Prefs.data_url + '/' + window.Prefs.fact + "?by=" + window.Prefs.time_bucket + "&last=" + window.Prefs.last;
+    var mapper = {
+        "line" : Chartkick.LineChart,
+        "bar"  : Chartkick.ColumnChart,
+        "pie"  : Chartkick.PieChart
+    };
+    new mapper[window.Prefs.chart_type]('chart', url, {});
+    updateLabels();
+};
+
+var byHour = function() {
+    window.Prefs.time_bucket = "hourly";
+    window.Prefs.last = 24;
+    reloadCharts();
+};
+
+var byDay = function() {
+    window.Prefs.time_bucket = "daily";
+    window.Prefs.last = 30;
+    reloadCharts();
+};
+
+var byWeek = function() {
+    window.Prefs.time_bucket = "weekly";
+    window.Prefs.last = 12;
+    reloadCharts();
+};
+
+var byMonth = function() {
+    window.Prefs.time_bucket = "monthly";
+    window.Prefs.last = 12;
+    reloadCharts();
+};
+
+var updateLabels = function() {
+    $('.time_dimension_label').text(window.Prefs.time_bucket);
+};

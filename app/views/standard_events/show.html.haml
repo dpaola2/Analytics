@@ -2,8 +2,19 @@
   %li= link_to "Events", standard_events_path
   %li= @standard_event_name
 .span8
-  %h3 by hour
-  = column_chart event_data_path(:id => @standard_event_name, :by => "hour")
-  %h3 by day
-  = column_chart event_data_path(:id => @standard_event_name, :by => "day")
+  .panel.panel-default
+    .panel-heading
+      = render "layouts/view_prefs"
+    .panel-body
+      #chart
 
+:javascript
+  window.Prefs = {
+    time_bucket: "daily",
+    last: 30,
+    chart_type: "line",
+    data_url: "/standard_events/event_data",
+    fact: "#{@standard_event_name}"
+  };
+
+  reloadCharts();

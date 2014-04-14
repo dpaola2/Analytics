@@ -8,26 +8,20 @@ class ApplicationController < ActionController::Base
   end
   
   def retrieve_fact_by_dimensions
-    by = params[:by] || "day"
+    by = params[:by] || "daily"
+    last = params[:last] || 30
+    group_clause = group_clause_mapper[by]
     if by == "day"
-      last = 30
       format = "%m/%d/%Y"
-      group_clause = :group_by_day
       group_dimension = :timestamp
     elsif by == "week"
-      last = 6
       format = "%m/%d/%Y"
-      group_clause = :group_by_week
       group_dimension = :timestamp
     elsif by == "hour"
-      last = 24
       format = "%l%p"
-      group_clause = :group_by_hour
       group_dimension = :timestamp
     else
-      last = 12
       format = "%m/%d/%Y"
-      group_clause = :group_by_day
       group_dimension = :timestamp
     end
     if @fact.index(",") # multiple
@@ -37,5 +31,14 @@ class ApplicationController < ActionController::Base
     else
       @klass.where(:name => @fact).send(group_clause, group_dimension, :last => last, :format => format).count
     end
+  end
+
+  def group_clause_mapper
+    {
+      "hourly" => :group_by_hour,
+      "daily" => :group_by_day,
+      "weekly" => :group_by_week,
+      "monthly" => :group_by_month
+    }
   end
 end

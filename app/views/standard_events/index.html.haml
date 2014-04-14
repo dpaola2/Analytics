@@ -1,8 +1,11 @@
 %ol.breadcrumb
   %li.active Events
-%p.leading== #{@standard_events.count} total
 .span8
-  = line_chart event_summary_path
-  %ul
-    - @standard_events.each do |event|
-      %li= link_to event.name, standard_event_path(event)
+  .panel.panel-default
+    .panel-heading
+      Events Overview (last 30 days)
+    .panel-body
+      = line_chart event_summary_path
+    %ul.list-group
+      - @standard_events.each do |event|
+        = link_to event.name, standard_event_path(event), :class => "list-group-item"
