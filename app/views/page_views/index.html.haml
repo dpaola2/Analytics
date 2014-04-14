@@ -1,9 +1,19 @@
 %ol.breadcrumb
   %li.active Pageviews
 .span8
-  %h2 Past 24 hours
-  = column_chart page_data_path(:id => "*", :by => "hour")
-  = pie_chart PageView.where("created_at > ?", DateTime.now - 24.hours).group(:path).count
-  %h2 Past 30 days
-  = column_chart page_data_path(:id => "*", :by => "day")
-  = pie_chart PageView.where("created_at > ?", Date.today - 30.days).group(:path).count
+  .panel.panel-default
+    .panel-heading
+      = render "layouts/view_prefs"
+    .panel-body
+      #chart
+
+:javascript
+  window.Prefs = {
+    time_bucket: "day",
+    last: 30,
+    chart_type: "line",
+    data_url: "/page_views/page_data",
+    fact: "*"
+  };
+
+  reloadCharts();

@@ -14,3 +14,29 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+var useLineChart = function() {
+    window.Prefs.chart_type = "line";
+    reloadCharts();
+};
+var useBarChart = function() {
+    window.Prefs.chart_type = "bar";
+    reloadCharts();
+};
+var usePieChart = function() {
+    window.Prefs.chart_type = "pie";
+    reloadCharts();
+};
+
+var reloadCharts = function() {
+    var url = window.Prefs.data_url + '/' + window.Prefs.fact + "?by=" + window.Prefs.time_bucket + "&last=" + window.Prefs.last;
+    var mapper = {
+        "line" : Chartkick.LineChart,
+        "bar"  : Chartkick.ColumnChart,
+        "pie"  : Chartkick.PieChart
+    };
+    new mapper[window.Prefs.chart_type]('chart', url, {});
+};
+
+
