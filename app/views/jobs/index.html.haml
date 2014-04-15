@@ -1,0 +1,24 @@
+%ol.breadcrumb
+  %li.active Jobs
+  
+.span8
+  %h1 Active Jobs
+  %p.leading== (#{@jobs.count})
+  %p== (#{@active_jobs.count} active)
+  %table.table
+    %tr
+      %th ID
+      %th Priority
+      %th Attempts
+      %th Last Error
+      %th Run
+      %th Created
+    - @jobs.each do |job|
+      %tr
+        %td= link_to job.id, job_path(job.id)
+        %td= job.priority
+        %td= job.attempts
+        %td= job.last_error
+        %td== #{time_ago_in_words(job.run_at)} ago
+        %td== #{time_ago_in_words(job.created_at)} ago
+  = will_paginate @jobs

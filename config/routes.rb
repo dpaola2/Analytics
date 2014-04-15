@@ -1,4 +1,5 @@
 Analytics::Application.routes.draw do
+  resources :jobs, :only => [:index, :show]
   resources :segment_definitions
 
   match "page_views/page_data/:id" => "page_views#page_data", :as => :page_data, :via => [:get, :post, :put]

@@ -21,6 +21,7 @@ gem 'rails_12factor'
 gem 'groupdate'
 gem 'chartkick'
 gem 'factory_girl_rails'
+gem 'delayed_job_active_record'
 
 group :development do
   gem 'better_errors'

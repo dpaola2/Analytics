@@ -2,6 +2,7 @@
   - if current_user.admin?
     %li
       %a{:href => users_path}
+        %span.glyphicon.glyphicon-wrench
         Users
   %li
     %a{:href => identities_path}
@@ -19,6 +20,10 @@
     %a{:href => segment_definitions_path}
       %span.glyphicon.glyphicon-tags
       Segments
+  %li
+    %a{:href => jobs_path}
+      %span.glyphicon.glyphicon-transfer
+      Jobs
   %li
     %a{:href => events_path}
       %span.glyphicon.glyphicon-list

@@ -1,0 +1,10 @@
+%ol.breadcrumb
+  %li= link_to "Jobs", jobs_path
+  %li.active== Job #{@job.id}
+
+.span8
+  %h1== Job #{@job.id}
+  %p== Created #{time_ago_in_words(@job.created_at)} ago
+  %h4 Handler:
+  %pre
+    = @job.handler
