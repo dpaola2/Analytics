@@ -1,0 +1,13 @@
+%ol.breadcrumb
+  %li.active Segments
+
+.span8
+  .panel.panel-default
+    .panel-heading
+      = link_to "Create segment", new_segment_definition_path, :class => "btn btn-primary btn-sm"
+      = @segment_defs.count
+      segments
+    .panel-body
+    %ul.list-group
+      - @segment_defs.each do |segment_def|
+        = link_to segment_def.name, segment_definition_path(segment_def), :class => 'list-group-item'
