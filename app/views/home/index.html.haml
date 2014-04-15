@@ -1,6 +1,6 @@
 %h3 Home
 
-Events per hour (last 24 minutes)
+Events per hour (last 24 hours)
 %br
 == (Average #{@avg_per_hour} per hour)
 %br
@@ -8,4 +8,4 @@ Events per hour (last 24 minutes)
 %br
 == (Average #{(@avg_per_hour / 60.0) / 60.0} per second)
 %br
-= area_chart Event.group_by_minute(:created_at, :last => 30).count
+= area_chart Event.group_by_hour(:created_at, :last => 24).count
