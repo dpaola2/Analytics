@@ -11,14 +11,14 @@ class ApplicationController < ActionController::Base
     by = params[:by] || "daily"
     last = params[:last] || 30
     group_clause = group_clause_mapper[by]
-    if by == "day"
+    if by == "daily"
       format = "%m/%d/%Y"
       group_dimension = :timestamp
-    elsif by == "week"
+    elsif by == "weekly"
       format = "%m/%d/%Y"
       group_dimension = :timestamp
-    elsif by == "hour"
-      format = "%l%p"
+    elsif by == "hourly"
+      format = nil
       group_dimension = :timestamp
     else
       format = "%m/%d/%Y"
