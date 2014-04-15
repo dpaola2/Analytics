@@ -10,4 +10,8 @@
     .panel-body
     %ul.list-group
       - @segment_defs.each do |segment_def|
-        = link_to segment_def.name, segment_definition_path(segment_def), :class => 'list-group-item'
+        %a{:href => segment_definition_path(segment_def), :class => "list-group-item"}
+          = segment_def.name
+          %span.badge
+            = segment_def.member_ids.size
+            identities
