@@ -22,7 +22,7 @@ class SegmentDefinitionsController < ApplicationController
   end
 
   def show
-    authorize! :manage, SegmentDefinition, :message => 'Not authorized as an administrator.'
+    authorize! :read, SegmentDefinition, :message => 'Not authorized as an administrator.'
     @segment_def = SegmentDefinition.find params[:id]
     @segment_members = Identity.where(:session_id => @segment_def.member_ids)
   end
