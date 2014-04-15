@@ -1,4 +1,11 @@
 %h3 Home
 
-Events ingested by day
-= column_chart Event.group_by_day(:created_at, :last => 30).count
+Events per hour (last 24 minutes)
+%br
+== (Average #{@avg_per_hour} per hour)
+%br
+== (Average #{@avg_per_hour / 60.0} per minute)
+%br
+== (Average #{(@avg_per_hour / 60.0) / 60.0} per second)
+%br
+= area_chart Event.group_by_minute(:created_at, :last => 30).count
