@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
     'Identify' => Identity
   }
 
-  after_save :extract!
+  after_save :background_extract
 
   def to_json
     JSON.parse(self.blob)
@@ -20,5 +20,9 @@ class Event < ActiveRecord::Base
     if klass
       klass.create_from_event!(self)
     end
+  end
+
+  def background_extract
+    self.delay.extract!
   end
 end
