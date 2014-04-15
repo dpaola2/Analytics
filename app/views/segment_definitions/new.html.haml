@@ -1,0 +1,11 @@
+%ol.breadcrumb
+  %li= link_to "Segments", segment_definitions_path
+  %li.active New
+
+= form_for @segment_def do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.label :event_name, "Users who have performed the event"
+  = f.text_field :event_name
+  = f.submit

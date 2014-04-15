@@ -8,7 +8,7 @@ class Ability
     end
 
     if user.has_role? :vip
-      can :read, [StandardEvent, Identity, Event, PageView]
+      can :read, [StandardEvent, Identity, Event, PageView, SegmentDefinition]
     end
     # Define abilities for the passed in user here. For example:
     #

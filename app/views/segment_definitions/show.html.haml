@@ -1,0 +1,18 @@
+%ol.breadcrumb
+  %li= link_to "Segments", segment_definitions_path
+  %li.active= @segment_def.name
+
+.span8
+  .panel.panel-default
+    .panel-heading
+      Segment:
+      %b= @segment_def.name
+      == (#{@segment_members.count})
+    .panel-body
+      %ul.list-group
+        - @segment_members.each do |identity|
+          %li.list-group-item
+            = identity.email
+            == (identity #{identity.id})
+
+  
