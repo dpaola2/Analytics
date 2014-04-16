@@ -11,7 +11,7 @@ class Identity < ActiveRecord::Base
     identity
   end
 
-  def to_param
-    self.session_id
+  def standard_events
+    StandardEvent.where(:session_id => self.sessions.pluck(:id).collect{|i| i.to_s}).order('timestamp ASC')
   end
 end

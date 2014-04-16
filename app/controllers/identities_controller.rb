@@ -9,4 +9,8 @@ class IdentitiesController < ApplicationController
     authorize! :read, Identity, :message => 'Not authorized as an administrator.'
     render json: Identity.group_by_week(:created, :last => 12, :format => "%m/%d/%Y").count
   end
+
+  def show
+    @identity = Identity.find params[:id]
+  end
 end

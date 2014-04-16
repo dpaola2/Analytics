@@ -1,5 +1,6 @@
 class StandardEvent < ActiveRecord::Base
   belongs_to :event
+  belongs_to :session
   
   def self.create_from_event!(event)
     event_id = event.id

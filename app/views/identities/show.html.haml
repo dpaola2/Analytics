@@ -1,0 +1,18 @@
+%ol.breadcrumb
+  %li= link_to "Identities", identities_path
+  %li.active= @identity.email
+
+.span8
+  .panel.panel-default
+    .panel-heading
+      = @identity.email
+      events (newest first)
+    .panel-body
+      %ul.list-group
+        - @identity.standard_events.each do |se|
+          %li.list-group-item
+            = se.name
+            = se.timestamp
+            %span.badge
+              = time_ago_in_words(se.timestamp)
+              ago
