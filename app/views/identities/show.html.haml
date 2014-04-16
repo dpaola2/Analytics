@@ -5,6 +5,7 @@
 .span8
   .panel.panel-default
     .panel-heading
+      = image_tag(avatar_url(@identity.email), :class => "img-thumbnail")
       = @identity.email
       events (newest first)
     .panel-body
