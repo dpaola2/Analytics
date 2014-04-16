@@ -25,4 +25,8 @@ class Event < ActiveRecord::Base
   def background_extract
     self.delay.extract!
   end
+
+  def self.reextract_all # THIS IS EXPENSIVE
+    Event.all.each {|e| e.background_extract }
+  end
 end
