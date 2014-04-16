@@ -1,7 +1,7 @@
 class SegmentDefinition < ActiveRecord::Base
   belongs_to :user
 
-  after_save :enqueue_recompute
+  after_create :enqueue_recompute
 
   def member_ids
     StandardEvent.select('DISTINCT session_id').where(:name => self.event_name).pluck(:session_id)
