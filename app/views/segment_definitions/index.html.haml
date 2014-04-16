@@ -12,6 +12,11 @@
       - @segment_defs.each do |segment_def|
         %a{:href => segment_definition_path(segment_def), :class => "list-group-item"}
           = segment_def.name
-          %span.badge
-            = segment_def.members.count
+          %span.label.label-primary
+            = segment_def.member_count
             identities
+          %span.label.label-info.pull-right
+            - if segment_def.updated_at == segment_def.created_at
+              processing
+            - else
+              == updated #{time_ago_in_words(segment_def.updated_at)} ago

@@ -5,3 +5,10 @@ task :reextract_standard_events => :environment do
     se.reextract!
   end
 end
+
+task :compute_segments => :environment do
+  segments = SegmentDefinition.all
+  segments.each do |seg|
+    seg.delay.recompute!
+  end
+end
