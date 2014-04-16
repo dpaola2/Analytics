@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   CLASSMAP = {
     'Track' => StandardEvent,
     'Page' => PageView,
-    'Identify' => Identity
+    'Identify' => Session
   }
 
   after_save :background_extract
