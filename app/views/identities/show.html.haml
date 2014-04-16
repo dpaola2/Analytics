@@ -9,11 +9,15 @@
       = @identity.email
       events (newest first)
     .panel-body
-      %ul.list-group
+      %table.table
+        %tr
+          %th ID
+          %th name
+          %th when
+          %th timestamp
         - @identity.standard_events.each do |se|
-          %li.list-group-item
-            = se.name
-            = se.timestamp
-            %span.badge
-              = time_ago_in_words(se.timestamp)
-              ago
+          %tr
+            %td= se.id
+            %td= se.name
+            %td== #{time_ago_in_words(se.timestamp)} ago
+            %td= se.timestamp

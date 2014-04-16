@@ -12,6 +12,6 @@ class Identity < ActiveRecord::Base
   end
 
   def standard_events
-    StandardEvent.where(:session_id => self.sessions.pluck(:id).collect{|i| i.to_s}).order('timestamp ASC')
+    StandardEvent.where(:session_id => self.sessions.pluck(:id).collect{|i| i.to_s}).order('timestamp DESC')
   end
 end
