@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
     'Identify' => Session
   }
 
-  after_save :background_extract
+  after_create :background_extract
 
   def to_json
     JSON.parse(self.blob)
