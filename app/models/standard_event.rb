@@ -7,7 +7,7 @@ class StandardEvent < ActiveRecord::Base
       name = event.to_json['event']
       timestamp = event.to_json['timestamp']
       unique_session_id = event.to_json['sessionId']
-      session = Session.where(:unique_session_id => unique_session_id).first_or_create
+      session = Session.where(:unique_id => unique_session_id).first_or_create
       se = StandardEvent.create!(:name => name, :timestamp => timestamp, :event_id => event_id, :session_id => session.id)
       return se
     end
