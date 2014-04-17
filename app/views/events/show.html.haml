@@ -6,4 +6,7 @@
 %p.leading== #{time_ago_in_words(@event.created_at)} ago
 
 %pre
-  = JSON.pretty_generate(JSON.parse(@event.blob))
+  - begin
+    = JSON.pretty_generate(JSON.parse(@event.blob))
+  - rescue
+    = @event.blob
