@@ -19,4 +19,4 @@
             - if segment_def.updated_at == segment_def.created_at
               processing
             - else
-              == updated #{time_ago_in_words(segment_def.updated_at)} ago
+              == last activity: #{time_ago_in_words(segment_def.updated_at)} ago
