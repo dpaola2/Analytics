@@ -7,5 +7,5 @@
   = f.text_field :name
   %br
   = f.label :event_name, "Users who have performed the event"
-  = f.text_field :event_name
+  = f.select :event_name, StandardEvent.items_for_select
   = f.submit

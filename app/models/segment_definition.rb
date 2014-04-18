@@ -39,4 +39,8 @@ class SegmentDefinition < ActiveRecord::Base
   def enqueue_recompute
     self.delay.recompute!
   end
+
+  def self.items_for_select
+    SegmentDefinition.all.collect {|s| [s.name, s.id]}
+  end
 end

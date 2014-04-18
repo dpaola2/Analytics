@@ -8,7 +8,7 @@
     = f.text_field :name
     %br
     = f.label :segment_definition_id, "Segment"
-    = f.select :segment_definition_id, SegmentDefinition.all.collect {|s| [s.name, s.id]}
+    = f.select :segment_definition_id, SegmentDefinition.items_for_select
     %br
     = f.hidden_field :time_bucket, :value => "weekly"
     = f.submit :class => "btn btn-primary btn-sm"

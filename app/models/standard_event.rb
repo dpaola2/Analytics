@@ -24,4 +24,8 @@ class StandardEvent < ActiveRecord::Base
   def to_param
     self.name
   end
+
+  def self.items_for_select
+    StandardEvent.select('DISTINCT name').collect {|e| e.name}
+  end
 end
