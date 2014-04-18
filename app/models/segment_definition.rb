@@ -23,7 +23,7 @@ class SegmentDefinition < ActiveRecord::Base
     self.member_identities.each do |identity|
       id_seg = IdentitySegment.where(:segment_definition_id => self.id).where(:left_at => nil).where(:identity_id => identity.id).first_or_initialize
       if id_seg.entered_at.nil?
-        id_seg.entered_at = DateTime.now
+        id_seg.entered_at = identity.first_event_timestamp(self.event_name).timestamp
       end
       id_seg.save!
     end

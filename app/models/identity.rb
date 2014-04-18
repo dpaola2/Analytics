@@ -13,7 +13,15 @@ class Identity < ActiveRecord::Base
     identity
   end
 
+  def session_ids_as_strings
+    self.sessions.pluck(:id).collect{|i| i.to_s}
+  end
+
   def standard_events
-    StandardEvent.where(:session_id => self.sessions.pluck(:id).collect{|i| i.to_s}).order('timestamp DESC')
+    StandardEvent.where(:session_id => self.session_ids_as_strings).order('timestamp DESC')
+  end
+
+  def first_event_timestamp(event_name)
+    StandardEvent.where(:name => event_name).where(:session_id => self.session_ids_as_strings).first
   end
 end
