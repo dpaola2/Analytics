@@ -64,6 +64,12 @@ var byMonth = function() {
     reloadCharts();
 };
 
+var byDayOfWeek = function() {
+    window.Prefs.time_bucket = "day_of_week";
+    window.Prefs.last = null;
+    reloadCharts();
+};
+
 var updateLabels = function() {
     $('.time_dimension_label').text(window.Prefs.time_bucket);
     $('.chart_type_label').text(window.Prefs.chart_type);
