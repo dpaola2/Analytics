@@ -19,6 +19,10 @@ class SegmentDefinition < ActiveRecord::Base
     self.identities
   end
 
+  def members_on_week(week)
+    self.identities.joins(:identity_segments).where('identity_segments.left_at IS NULL').where('identity_segments.entered_at > ? AND identity_segments.entered_at < ?', week.beginning_of_week, week.end_of_week)
+  end
+
   def recompute!
     self.member_identities.each do |identity|
       id_seg = IdentitySegment.where(:segment_definition_id => self.id).where(:left_at => nil).where(:identity_id => identity.id).first_or_initialize

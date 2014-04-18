@@ -1,0 +1,15 @@
+%ol.breadcrumb
+  %li.active Cohorts
+
+.span8
+  .panel.panel-default
+    .panel-heading
+      = link_to "Create cohort", new_cohort_path, :class => "btn btn-primary btn-sm"
+      = @cohorts.count
+      cohorts
+    .panel-body
+      %ul.list-group
+        - @cohorts.each do |cohort|
+          %a{:href => cohort_path(cohort), :class => "list-group-item"}
+            = cohort.name
+          

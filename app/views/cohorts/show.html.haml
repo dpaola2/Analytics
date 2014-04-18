@@ -1,0 +1,18 @@
+%ol.breadcrumb
+  %li= link_to "Cohorts", cohorts_path
+  %li.active= @cohort.name
+
+.span8
+  .panel.panel-default
+    .panel-heading
+      = @cohort.name
+    .panel-body
+      %table.table
+        %tr
+          %th Date
+          %th
+            = @cohort.segment_definition.name
+        - @cohort.results.each do |result|
+          %tr
+            %td= result[:week]
+            %td= result[:count]

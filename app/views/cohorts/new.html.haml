@@ -1,0 +1,14 @@
+%ol.breadcrumb
+  %li= link_to 'Cohorts', cohorts_path
+  %li New
+
+.span8
+  = form_for @cohort do |f|
+    = f.label :name
+    = f.text_field :name
+    %br
+    = f.label :segment_definition_id, "Segment"
+    = f.select :segment_definition_id, SegmentDefinition.all.collect {|s| [s.name, s.id]}
+    %br
+    = f.hidden_field :time_bucket, :value => "weekly"
+    = f.submit :class => "btn btn-primary btn-sm"

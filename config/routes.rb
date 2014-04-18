@@ -1,4 +1,6 @@
 Analytics::Application.routes.draw do
+  resources :cohorts
+
   resources :jobs, :only => [:index, :show]
   resources :segment_definitions
 

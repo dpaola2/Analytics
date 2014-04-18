@@ -15,8 +15,7 @@
             = link_to identity.email, identity_path(identity)
             == (identity #{identity.id})
             %span.badge
-              = identity.sessions.count
-              session ids
+              insert join date
 
 
   
