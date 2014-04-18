@@ -1,5 +1,6 @@
 class SegmentDefinition < ActiveRecord::Base
   belongs_to :user
+  has_many :identity_segments
 
   after_create :enqueue_recompute
 

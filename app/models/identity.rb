@@ -1,5 +1,6 @@
 class Identity < ActiveRecord::Base
   has_many :sessions
+  has_many :identity_segments
 
   def self.create_from_event!(event)
     identity = Identity.new

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416225942) do
+ActiveRecord::Schema.define(version: 20140418182316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20140416225942) do
     t.datetime "created"
     t.integer  "event_id"
     t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "identity_segments", force: true do |t|
+    t.integer  "identity_id"
+    t.integer  "segment_definition_id"
+    t.datetime "created_at"
+    t.datetime "left_at"
     t.datetime "updated_at"
   end
 
