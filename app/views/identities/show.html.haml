@@ -9,6 +9,10 @@
       = @identity.email
       events (newest first)
     .panel-body
+      %h3 Segments:
+      - @identity.segment_definitions.each do |seg|
+        = link_to seg.name, segment_definition_path(seg), :class => "btn btn-sm btn-primary"
+      %h3 Activity
       %table.table
         %tr
           %th ID
