@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 20140418182316) do
   create_table "identity_segments", force: true do |t|
     t.integer  "identity_id"
     t.integer  "segment_definition_id"
-    t.datetime "created_at"
+    t.datetime "entered_at"
     t.datetime "left_at"
+    t.datetime "created_at"
     t.datetime "updated_at"
   end
 
