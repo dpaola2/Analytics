@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418211737) do
+ActiveRecord::Schema.define(version: 20140421210733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_stat_statements"
+  enable_extension "hstore"
 
   create_table "cohorts", force: true do |t|
     t.string   "name"
@@ -45,7 +46,10 @@ ActiveRecord::Schema.define(version: 20140418211737) do
     t.text     "blob"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "properties"
   end
+
+  add_index "events", ["properties"], name: "events_properties_index", using: :gin
 
   create_table "identities", force: true do |t|
     t.string   "userid"
