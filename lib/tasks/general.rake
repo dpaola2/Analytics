@@ -12,3 +12,10 @@ task :compute_segments => :environment do
     seg.delay.recompute!
   end
 end
+
+task :parse_events => :environment do
+  events = Event.where("properties is NULL")
+  events.each do |event|
+    event.delay.parse
+  end
+end

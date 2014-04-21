@@ -8,7 +8,11 @@ class Event < ActiveRecord::Base
   after_create :background_extract
 
   def to_json
-    JSON.parse(self.blob)
+    if self.properties.nil?
+      JSON.parse(self.blob)
+    else
+      self.properties
+    end
   end
 
   def action
@@ -24,9 +28,11 @@ class Event < ActiveRecord::Base
 
   def background_extract
     self.delay.extract!
+    self.delay.parse
   end
 
-  def self.reextract_all # THIS IS EXPENSIVE
-    Event.all.each {|e| e.background_extract }
+  def parse
+    self.properties = self.to_json
+    self.save!
   end
 end
