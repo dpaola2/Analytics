@@ -15,7 +15,9 @@ end
 
 task :parse_events => :environment do
   events = Event.where("properties is NULL")
-  events.each do |event|
-    event.delay.parse
+  events.find_in_batches(batch_size: 100) do |event_batch|
+    event_batch.each do |event|
+      event.delay.parse
+    end
   end
 end
