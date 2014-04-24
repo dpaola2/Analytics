@@ -9,13 +9,12 @@
       %b= @segment_def.name
       == (#{@segment_members.count})
     .panel-body
+      = line_chart @segment_def.members.group_by_day(:entered_at).count
       %ul.list-group
         - @segment_members.each do |identity|
           %li.list-group-item
             = link_to identity.email, identity_path(identity)
             == (identity #{identity.id})
-            %span.badge
-              insert join date
 
 
   
