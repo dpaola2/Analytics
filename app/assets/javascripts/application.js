@@ -70,6 +70,12 @@ var byDayOfWeek = function() {
     reloadCharts();
 };
 
+var byHourOfDay = function() {
+    window.Prefs.time_bucket = "hour_of_day";
+    window.Prefs.last = null;
+    reloadCharts();
+};
+
 var updateLabels = function() {
     $('.time_dimension_label').text(window.Prefs.time_bucket);
     $('.chart_type_label').text(window.Prefs.chart_type);

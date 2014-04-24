@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
       format = "%A"
       last = nil
       group_dimension = :timestamp
+    elsif by == "hour_of_day"
+      format = "%l %P"
+      last = nil
+      group_dimension = :timestamp
     else
       format = "%m/%d/%Y"
       group_dimension = :timestamp
@@ -43,7 +47,8 @@ class ApplicationController < ActionController::Base
       "daily" => :group_by_day,
       "weekly" => :group_by_week,
       "monthly" => :group_by_month,
-      "day_of_week" => :group_by_day_of_week
+      "day_of_week" => :group_by_day_of_week,
+      "hour_of_day" => :group_by_hour_of_day
     }
   end
 end
