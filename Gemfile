@@ -22,6 +22,7 @@ gem 'groupdate'
 gem 'chartkick'
 gem 'factory_girl_rails'
 gem 'delayed_job_active_record'
+gem 'rollbar'
 
 group :development do
   gem 'better_errors'
