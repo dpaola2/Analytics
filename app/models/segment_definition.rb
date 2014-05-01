@@ -27,15 +27,19 @@ class SegmentDefinition < ActiveRecord::Base
   end
 
   def recompute!
-    self.member_identities.each do |identity|
-      id_seg = IdentitySegment.where(:segment_definition_id => self.id).where(:left_at => nil).where(:identity_id => identity.id).first_or_initialize
-      if id_seg.entered_at.nil?
-        id_seg.entered_at = identity.first_event_timestamp(self.segment_events.collect{|s| s.event_name}).timestamp
+    result = Benchmark.measure do
+      self.member_identities.each do |identity|
+        id_seg = IdentitySegment.where(:segment_definition_id => self.id).where(:left_at => nil).where(:identity_id => identity.id).first_or_initialize
+        if id_seg.entered_at.nil?
+          id_seg.entered_at = identity.first_event_timestamp(self.segment_events.collect{|s| s.event_name}).timestamp
+        end
+        id_seg.save!
       end
-      id_seg.save!
-    end
 
-    self.member_count = member_identities.count
+      self.member_count = member_identities.count
+      self.save!
+    end
+    self.compute_seconds = result.real
     self.save!
   end
 
