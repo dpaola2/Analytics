@@ -7,5 +7,5 @@
   = f.text_field :name
   %br
   = f.label :event_name, "Users who have performed the event"
-  = f.select :event_name, StandardEvent.items_for_select
+  = f.select :event_name, StandardEvent.items_for_select, {}, {:multiple => true, :size => 25}
   = f.submit

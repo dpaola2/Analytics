@@ -21,7 +21,9 @@ class Identity < ActiveRecord::Base
     StandardEvent.where(:session_id => self.session_ids_as_strings).order('timestamp DESC')
   end
 
-  def first_event_timestamp(event_name)
-    StandardEvent.where(:name => event_name).where(:session_id => self.session_ids_as_strings).first
+  def first_event_timestamp(event_names)
+    event_names.collect do |event_name|
+      StandardEvent.where(:name => event_name).where(:session_id => self.session_ids_as_strings).order('timestamp ASC').first
+    end.compact.sort {|a, b| a.timestamp <=> b.timestamp}.first
   end
 end
