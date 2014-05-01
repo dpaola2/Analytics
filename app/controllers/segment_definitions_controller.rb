@@ -13,10 +13,24 @@ class SegmentDefinitionsController < ApplicationController
 
   def create
     authorize! :manage, SegmentDefinition, :message => 'Not authorized as an administrator.'
-    @segment_def = SegmentDefinition.new segment_definition_params
+    @segment_def = SegmentDefinition.new
+    @segment_def.name = segment_definition_params[:name]
     @segment_def.user_id = current_user.id
     if @segment_def.save
+      begin
+        event_names = segment_definition_params[:event_name]
+        event_names.each do |name|
+          if name.present? && name != ""
+            SegmentEvent.where(:segment_definition_id => @segment_def.id).where(:event_name => name).first_or_create
+          end
+        end
+      rescue Exception => e
+        flash[:error] = "There were some errors"
+        redirect_to :back
+        return
+      end
       flash[:success] = "Saved."
+      @segment_def.enqueue_recompute
       redirect_to segment_definitions_path
     end
   end
@@ -30,6 +44,6 @@ class SegmentDefinitionsController < ApplicationController
   private
 
   def segment_definition_params
-    params.require(:segment_definition).permit(:name, :event_name)
+    params.require(:segment_definition).permit!
   end
 end

@@ -5,11 +5,27 @@
 .span8
   .panel.panel-default
     .panel-heading
-      Segment:
-      %b= @segment_def.name
-      == (#{@segment_members.count})
+      %p 
+        Segment:
+        %b= @segment_def.name
+        == (#{@segment_members.count})
+      %p
+        Any of the following events:
+        - @segment_def.segment_events.each do |segment_event|
+          .span.label.label-primary=segment_event.event_name
+      %p
+        Compute time:
+        - if @segment_def.compute_seconds
+          = distance_of_time_in_words(@segment_def.compute_seconds)
+        - else
+          (unknown)
     .panel-body
+      %h3 Daily new members
       = line_chart @segment_def.members.group_by_day(:entered_at).count
+  .panel.panel-default
+    .panel-heading
+      Members
+    .panel-body
       %ul.list-group
         - @segment_members.each do |identity|
           %li.list-group-item

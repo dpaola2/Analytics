@@ -3,11 +3,14 @@ class SegmentDefinition < ActiveRecord::Base
   has_many :identity_segments
   has_many :identities, :through => :identity_segments
 
-  after_create :enqueue_recompute
+  has_many :segment_events
 
   def member_session_ids
     # this is where intersection will be done in the future
-    StandardEvent.select('DISTINCT session_id').where(:name => self.event_name).pluck(:session_id)
+    event_names = self.segment_events.collect{|se| se.event_name }
+    event_names.collect do |event_name|
+      StandardEvent.select('DISTINCT session_id').where(:name => event_name).pluck(:session_id)
+    end.flatten.uniq
   end
 
   def member_identities
@@ -24,15 +27,19 @@ class SegmentDefinition < ActiveRecord::Base
   end
 
   def recompute!
-    self.member_identities.each do |identity|
-      id_seg = IdentitySegment.where(:segment_definition_id => self.id).where(:left_at => nil).where(:identity_id => identity.id).first_or_initialize
-      if id_seg.entered_at.nil?
-        id_seg.entered_at = identity.first_event_timestamp(self.event_name).timestamp
+    result = Benchmark.measure do
+      self.member_identities.each do |identity|
+        id_seg = IdentitySegment.where(:segment_definition_id => self.id).where(:left_at => nil).where(:identity_id => identity.id).first_or_initialize
+        if id_seg.entered_at.nil?
+          id_seg.entered_at = identity.first_event_timestamp(self.segment_events.collect{|s| s.event_name}).timestamp
+        end
+        id_seg.save!
       end
-      id_seg.save!
-    end
 
-    self.member_count = member_identities.count
+      self.member_count = member_identities.count
+      self.save!
+    end
+    self.compute_seconds = result.real
     self.save!
   end
 
