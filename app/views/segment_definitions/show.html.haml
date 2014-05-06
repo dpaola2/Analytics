@@ -8,7 +8,7 @@
       %p 
         Segment:
         %b= @segment_def.name
-        == (#{@segment_members.count})
+        == (#{@segment_member_identities.count})
       %p
         Any of the following events:
         - @segment_def.segment_events.each do |segment_event|
@@ -26,11 +26,21 @@
     .panel-heading
       Members
     .panel-body
-      %ul.list-group
-        - @segment_members.each do |identity|
-          %li.list-group-item
-            = link_to identity.email, identity_path(identity)
-            == (identity #{identity.id})
+      %table.table
+        %tr
+          %th ID
+          %th Email
+          %th Entered Segment
+        - @segment_member_identities.each do |id_seg|
+          %tr
+            %td
+              = id_seg.identity.id
+            %td
+              = link_to id_seg.identity.email, identity_path(id_seg.identity)
+            %td{:title => id_seg.entered_at}
+              = time_ago_in_words(id_seg.entered_at) 
+              ago
+      = will_paginate @segment_member_identities
 
 
   

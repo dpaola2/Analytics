@@ -38,7 +38,7 @@ class SegmentDefinitionsController < ApplicationController
   def show
     authorize! :read, SegmentDefinition, :message => 'Not authorized as an administrator.'
     @segment_def = SegmentDefinition.find params[:id]
-    @segment_members = @segment_def.members
+    @segment_member_identities = @segment_def.identity_segments.order('entered_at DESC').page(params[:page]).per_page(25)
   end
 
   private
