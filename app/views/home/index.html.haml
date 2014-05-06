@@ -1,11 +1,29 @@
 %h3 Home
 
-Events per hour (last 24 hours)
-%br
-== (Average #{@avg_per_hour} per hour)
-%br
-== (Average #{@avg_per_hour / 60.0} per minute)
-%br
-== (Average #{(@avg_per_hour / 60.0) / 60.0} per second)
-%br
-= area_chart Event.group_by_hour(:created_at, :last => 24).count
+- if user_signed_in?
+  == Welcome, #{current_user.email}.
+  %h3 Stats:
+  %ul
+    %li== #{Event.count} total records tracked
+    %li== #{StandardEvent.count} events tracked
+    %li== #{Session.count} sessions tracked
+    %li== #{Identity.count} identities tracked
+    %li== #{SegmentDefinition.count} segments computed
+    %li== #{Cohort.count} cohorts computed
+  %p
+    Note: if the navigation doesn't work, or you can't see any data, you need to ask Dave to grant permissions. Can't have randos signing up and viewing all our data!
+- else
+  = link_to "Sign up", new_user_registration_path
+  or
+  = link_to "Log in", new_user_session_path
+
+%hr
+%center  
+  %p
+    = link_to "View this project on Github", "http://github.com/dpaola2/Analytics", :target => "_blank"
+  %p
+    The code that powers this application is released under the
+    = link_to "NCSA Public license", "https://github.com/dpaola2/Analytics/blob/master/LICENSE", :target => "_blank"
+  %p
+    created by 
+    = link_to "@dpaola2", "http://twitter.com/dpaola2"
