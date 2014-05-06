@@ -18,3 +18,11 @@
     %li= link_to "monthly", "javascript:void(0);", :onClick => "byMonth()"
     %li= link_to "day_of_week", "javascript:void(0)", :onClick => "byDayOfWeek()"
     %li= link_to "hour_of_day", "javascript:void(0)", :onClick => "byHourOfDay()"
+
+.btn-group
+  %a{:href => "javascript:void(0);", :class => "btn btn-default dropdown-toggle", :data => {:toggle => "dropdown"}}
+    %span.total_unique_label total
+    %span.caret
+  %ul.dropdown-menu
+    %li= link_to "total", "javascript:void(0);"
+    %li= link_to "unique", "javascript:void(0);"
