@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 ruby '2.1.0'
 gem 'rails', '4.0.2'
 gem 'sass-rails', '~> 4.0.0'
@@ -41,3 +42,12 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
 end
+
+
+#--------------------------------------------------------------
+# Bower Assets
+# -------------------------------------------------------------
+# see https://rails-assets.org/
+
+gem 'rails-assets-underscore'
+

@@ -11,27 +11,32 @@ class ApplicationController < ActionController::Base
     by = params[:by] || "daily"
     last = params[:last] || 30
     group_clause = group_clause_mapper[by]
-    if by == "daily"
+    group_dimension = :timestamp
+    case by
+    when "daily"
       format = "%m/%d/%Y"
-      group_dimension = :timestamp
-    elsif by == "weekly"
+    when "weekly"
       format = "%m/%d/%Y"
-      group_dimension = :timestamp
-    elsif by == "hourly"
+    when "hourly"
       format = nil
-      group_dimension = :timestamp
-    elsif by == "day_of_week"
+    when "day_of_week"
       format = "%A"
       last = nil
-      group_dimension = :timestamp
-    elsif by == "hour_of_day"
+    when "hour_of_day"
       format = "%l %P"
       last = nil
-      group_dimension = :timestamp
+    when 'hours_by_weekday'
+      hash = {}
+      Date::DAYNAMES.each_with_index do |day, index| # 0 is sunday
+        hash[day] = @klass.where(:name => @fact)
+                          .where("EXTRACT(DOW FROM timestamp) = ?", index)
+                          .group_by_hour_of_day(group_dimension, last: nil, format: '%l%p').count
+      end
+      return hash
     else
       format = "%m/%d/%Y"
-      group_dimension = :timestamp
     end
+
     if @fact.index(",") # multiple
       @fact.split(",").collect {|f| @klass.send(group_clause, group_dimension, :last => last, :format => format).count }
     elsif @fact == "*"

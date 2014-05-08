@@ -6,6 +6,7 @@
     %li= link_to "line", "javascript:void(0);", :onClick => "useLineChart()"
     %li= link_to "bar", "javascript:void(0);", :onClick => "useBarChart()"
     %li= link_to "pie", "javascript:void(0);", :onClick => "usePieChart()"
+    %li= link_to "bubble", "javascript:void(0);", :onClick => "useBubbleChart()"
 
 .btn-group
   %a{:href => "javascript:void(0);", :class => "btn btn-default dropdown-toggle", :data => {:toggle => "dropdown"}}
@@ -18,6 +19,7 @@
     %li= link_to "monthly", "javascript:void(0);", :onClick => "byMonth()"
     %li= link_to "day_of_week", "javascript:void(0)", :onClick => "byDayOfWeek()"
     %li= link_to "hour_of_day", "javascript:void(0)", :onClick => "byHourOfDay()"
+    %li= link_to "hours_by_weekday", "javascript:void(0)", :onClick => "byHoursByWeekday()"
 
 .btn-group
   %a{:href => "javascript:void(0);", :class => "btn btn-default dropdown-toggle", :data => {:toggle => "dropdown"}}

@@ -10,10 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require underscore
 //= require jquery
 //= require jquery_ujs
+//= require highcharts
+//= require highcharts-heatmap
+//= require chartkick
 //= require bootstrap
 //= require_tree .
+//= require_self
 
 
 var useLineChart = function() {
@@ -29,12 +34,18 @@ var usePieChart = function() {
     reloadCharts();
 };
 
+var useHeatmapChart = function() {
+    window.Prefs.chart_type = "heatmap";
+    reloadCharts();
+};
+
 var reloadCharts = function() {
     var url = window.Prefs.data_url + '/' + window.Prefs.fact + "?by=" + window.Prefs.time_bucket + "&last=" + window.Prefs.last;
     var mapper = {
         "line" : Chartkick.LineChart,
         "bar"  : Chartkick.ColumnChart,
-        "pie"  : Chartkick.PieChart
+        "pie"  : Chartkick.PieChart,
+        "heatmap"  : HeatmapChart,
     };
     new mapper[window.Prefs.chart_type]('chart', url, {});
     updateLabels();
@@ -72,6 +83,12 @@ var byDayOfWeek = function() {
 
 var byHourOfDay = function() {
     window.Prefs.time_bucket = "hour_of_day";
+    window.Prefs.last = null;
+    reloadCharts();
+};
+
+var byHoursByWeekday = function() {
+    window.Prefs.time_bucket = "hours_by_weekday";
     window.Prefs.last = null;
     reloadCharts();
 };
