@@ -3,3 +3,8 @@
   identities
 
 = column_chart identities_summary_path
+
+%h3 View identities by segment:
+%ul
+  - SegmentDefinition.all.each do |seg_def|
+    %li= link_to seg_def.name, identities_by_segment_path(seg_def)

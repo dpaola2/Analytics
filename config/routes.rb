@@ -12,6 +12,7 @@ Analytics::Application.routes.draw do
   resources :standard_events, :only => [:index, :show]
 
   match "identites/summary" => "identities#summary", :as => :identities_summary, :via => [:get, :post]
+  match "identities/by_segment/:id" => "identities#by_segment", :as => :identities_by_segment, :via => [:get]
   resources :identities, :only => [:index, :show]
   
   root :to => "home#index"

@@ -35,4 +35,16 @@ class Event < ActiveRecord::Base
     self.properties = self.to_json
     self.save!
   end
+
+  def source_string
+    if self.properties['options']
+      opts = eval(self.properties['options'])
+      source = opts['source']
+      medium = opts['medium']
+      campaign = opts['medium']
+      "#{source} / #{campaign} / #{medium}"
+    else
+      nil
+    end
+  end
 end

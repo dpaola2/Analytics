@@ -1,0 +1,23 @@
+%ol.breadcrumb
+  %li= link_to "Identities", identities_path
+  %li.active== Identities by segment: #{@segment_def.name}
+
+.span8
+  .panel
+    .panel-heading
+      %h2
+        Identities by segment:
+        = @segment_def.name
+    .panel-body
+      %table.table
+        %tr
+          %th Identity
+          %th First Event
+          %th src / med / camp
+          %th Date
+        - @segment_def.identity_segments.each do |seg_id|
+          %tr
+            %td= link_to seg_id.identity.email, identity_path(seg_id.identity)
+            %td= seg_id.first_event
+            %td= seg_id.identity.first_visit_string
+            %td= seg_id.entered_at.strftime("%m/%d/%Y")

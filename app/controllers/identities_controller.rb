@@ -13,4 +13,8 @@ class IdentitiesController < ApplicationController
   def show
     @identity = Identity.find params[:id]
   end
+
+  def by_segment
+    @segment_def = SegmentDefinition.find params[:id]
+  end
 end

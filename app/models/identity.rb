@@ -26,4 +26,14 @@ class Identity < ActiveRecord::Base
       StandardEvent.where(:name => event_name).where(:session_id => self.session_ids_as_strings).order('timestamp ASC').first
     end.compact.sort {|a, b| a.timestamp <=> b.timestamp}.first
   end
+
+  def first_visit_string
+    sessions = self.session_ids_as_strings.collect {|s| Session.find(s.to_i).unique_id }
+    visit = Event.where("properties->'action' = 'Page'").where("properties->'sessionId' IN (?)", sessions.join(",")).order("properties->'timestamp'").first
+    if visit.nil?
+      "no visits"
+    else
+      visit.source_string
+    end
+  end
 end
