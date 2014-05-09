@@ -6,7 +6,7 @@ class Session < ActiveRecord::Base
     session = Session.where(:unique_id => unique_id).first_or_initialize
 
     # find all identities with this email and point this session to them
-    dupes = Session.includes(:identity).where("email is not NULL and email != ''").where('identities.email = ?', event.to_json['traits']['email'])
+    dupes = Session.includes(:identity).where("(sessions.email IS NOT NULL AND sessions.email != '' AND identities.email = ?) OR identities.userId = ?", event.to_json['traits']['email'], event.to_json["userId"])
     if dupes.count < 1
       new_identity = Identity.create_from_event!(event)
       session.identity_id = new_identity.id

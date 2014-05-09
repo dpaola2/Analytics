@@ -38,14 +38,10 @@ class Event < ActiveRecord::Base
   end
 
   def source_string
-    if self.properties['options']
-      opts = eval(self.properties['options'])
-      source = opts['source']
-      medium = opts['medium']
-      campaign = opts['medium']
-      "#{source} / #{campaign} / #{medium}"
-    else
-      nil
-    end
+    identities = Identity.where(:userid => self.properties['userId']).all
+    sessions = Session.where(:unique_id => self.properties['sessionId']).all
+    sessions = (sessions + identities.collect {|i| i.sessions}).flatten.uniq
+    identities = (identities + sessions.collect{|s| s.identity}).flatten.uniq
+    pageviews = identities.collect {|i| PageView.joins("INNER JOIN events ON events.id = page_views.event_id").where("events.properties->'userId' = ? OR events.properties->'sessionId' IN (?)", i.userid, i.sessions.collect {|s| s.unique_id}.join(",")).all }.flatten
   end
 end
