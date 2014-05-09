@@ -33,6 +33,7 @@ class Event < ActiveRecord::Base
 
   def parse
     self.properties = self.to_json
+    self.json_properties = self.blob
     self.save!
   end
 
